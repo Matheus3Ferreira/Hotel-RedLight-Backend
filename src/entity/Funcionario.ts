@@ -12,15 +12,15 @@ import { Ocupacao } from './Ocupacao'
 
 @Entity()
 export class Funcionario {
-    
+
     @PrimaryGeneratedColumn()
     idFuncionario: string;
 
     @Column()
     idOcupacao: number;
 
-    @JoinColumn({name: "idOcupacao"})
-    @ManyToOne(type => Ocupacao, funcionarios => Funcionario, { eager: true})
+    @JoinColumn({ name: "idOcupacao" })
+    @ManyToOne(type => Ocupacao, funcionarios => Funcionario, { eager: true })
     ocupacao: Ocupacao;
 
     @Column()

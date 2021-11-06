@@ -4,7 +4,10 @@ import {
     Column,
     CreateDateColumn,
     UpdateDateColumn,
+    ManyToOne,
+    OneToMany,
 } from "typeorm";
+import { Quarto } from "./Quarto";
 
 @Entity()
 export class Comodidade {

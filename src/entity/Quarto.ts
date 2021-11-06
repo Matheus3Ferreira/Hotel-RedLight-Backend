@@ -4,8 +4,12 @@ import {
     Column,
     CreateDateColumn,
     UpdateDateColumn,
+    JoinColumn,
+    OneToMany,
+    ManyToOne,
 
 } from "typeorm";
+import { Comodidade } from "./Comodidade";
 
 @Entity()
 export class Quarto {
@@ -15,16 +19,16 @@ export class Quarto {
 
     @Column()
     nome: string;
-    
+
     @Column()
     tipo: string;
-    
-    @Column("decimal", {scale: 2})
+
+    @Column("decimal", { scale: 2 })
     valorDiaria: number;
 
     @Column()
     telefone: string;
-    
+
     @Column()
     cpf: string;
 

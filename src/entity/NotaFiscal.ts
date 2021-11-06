@@ -14,13 +14,14 @@ export class NotaFiscal {
 
     @PrimaryGeneratedColumn()
     idNotaFiscal: string;
-    
+
     @Column()
     idHospede: number;
 
-    @JoinColumn({name: "idHospede"})
-    @ManyToOne(type => Hospede, notasFiscais => NotaFiscal, {eager: true})
-    hospede: Hospede;    
+    @JoinColumn({ name: "idHospede" })
+    @ManyToOne(type => Hospede, notasFiscais => NotaFiscal, { eager: true })
+    hospede: Hospede;
+
 
     @Column()
     dataEmissao: Date;

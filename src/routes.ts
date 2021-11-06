@@ -4,6 +4,7 @@ import { getFuncionarios, getFuncionario, saveFuncionario, updateFuncionario, de
 import { deleteComodidade, getComodidade, getComodidades, saveComodidade, updateComodidade } from './controller/ComodidadeController';
 import { deleteHospede, getHospede, getHospedes, saveHospede, updateHospede } from './controller/HospedeController';
 import { deleteServico, getOneServico, getServicos, saveServico, updateServico } from './controller/ServicoController'
+import { deleteConta, getConta, getOneConta, saveConta, updateConta } from './controller/ContaController';
 
 
 const routes = Router()
@@ -39,8 +40,11 @@ routes.post('/servico', saveServico);
 routes.put('/servico/:id', updateServico)
 routes.delete('/servico/:id', deleteServico)
 
-
-
+routes.get('/conta', getConta);
+routes.get('/conta/:id', getOneConta);
+routes.post('/conta', saveConta);
+routes.put('/conta/:id', updateConta)
+routes.delete('/conta/:id', deleteConta)
 
 
 export default routes
