@@ -8,8 +8,8 @@ export class Servico {
     @PrimaryGeneratedColumn()
     idServico: string;
 
-    @ManyToOne(() => Conta, servicos => servicos)
-    conta: Conta;
+    // @ManyToOne(() => Conta, servicos => servicos)
+    // conta: Conta;
 
     @Column()
     nome: string;

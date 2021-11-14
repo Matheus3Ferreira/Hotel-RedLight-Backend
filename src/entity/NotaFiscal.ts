@@ -18,9 +18,9 @@ export class NotaFiscal {
     @Column()
     idHospede: number;
 
-    @JoinColumn({ name: "idHospede" })
-    @ManyToOne(type => Hospede, notasFiscais => NotaFiscal, { eager: true })
-    hospede: Hospede;
+    // @JoinColumn({ name: "idHospede" })
+    // @ManyToOne(type => Hospede, notasFiscais => NotaFiscal, { eager: true })
+    // hospede: Hospede;
 
 
     @Column()

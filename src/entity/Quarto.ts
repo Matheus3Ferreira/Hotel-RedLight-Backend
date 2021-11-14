@@ -4,9 +4,8 @@ import {
     Column,
     CreateDateColumn,
     UpdateDateColumn,
-    JoinColumn,
-    OneToMany,
-    ManyToOne,
+    ManyToMany,
+    JoinTable,
 
 } from "typeorm";
 import { Comodidade } from "./Comodidade";
@@ -15,22 +14,23 @@ import { Comodidade } from "./Comodidade";
 export class Quarto {
 
     @PrimaryGeneratedColumn()
-    idQuarto: string;
+    numeroQuarto: number;
+
+    @ManyToMany(() => Comodidade)
+    @JoinTable()
+    comodidades: Comodidade;
 
     @Column()
     nome: string;
 
     @Column()
-    tipo: string;
+    descricao: string;
 
     @Column("decimal", { scale: 2 })
     valorDiaria: number;
-
-    @Column()
-    telefone: string;
-
-    @Column()
-    cpf: string;
+    
+    @Column({ default: true })
+    disponivel: Boolean;
 
     @CreateDateColumn()
     created_at: Date;

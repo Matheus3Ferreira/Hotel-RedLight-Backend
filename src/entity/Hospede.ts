@@ -7,6 +7,7 @@ import {
     OneToMany,
 } from "typeorm";
 import { NotaFiscal } from "./NotaFiscal";
+import { Reserva } from "./Reserva";
 
 @Entity()
 export class Hospede {
@@ -14,8 +15,8 @@ export class Hospede {
     @PrimaryGeneratedColumn()
     idHospede: string;
 
-    @OneToMany(type => NotaFiscal, hospede => Hospede)
-    notasFiscais: NotaFiscal[];
+    @OneToMany(type => Reserva, hospede => Hospede)
+    reservas: Reserva[];
 
     @Column()
     nome: string;

@@ -2,13 +2,12 @@ import { Router } from 'express'
 import { getOcupacoes, getOcupacao, saveOcupacao, updateOcupacao, deleteOcupacao } from './controller/OcupacaoController'
 import { getFuncionarios, getFuncionario, saveFuncionario, updateFuncionario, deleteFuncionario } from './controller/FuncionarioController'
 import { deleteComodidade, getComodidade, getComodidades, saveComodidade, updateComodidade } from './controller/ComodidadeController';
+import { deleteQuarto, getQuartos, getQuarto, saveQuarto, updateQuarto, bookQuarto } from './controller/QuartoController'
 import { deleteHospede, getHospede, getHospedes, saveHospede, updateHospede } from './controller/HospedeController';
 import { deleteServico, getOneServico, getServicos, saveServico, updateServico } from './controller/ServicoController'
-import { deleteConta, getConta, getOneConta, saveConta, updateConta } from './controller/ContaController';
-
+// import { deleteConta, getConta, getOneConta, saveConta, updateConta } from './controller/ContaController';
 
 const routes = Router()
-
 
 routes.get('/ocupacao', getOcupacoes);
 routes.get('/ocupacao/:id', getOcupacao);
@@ -28,11 +27,12 @@ routes.post('/comodidade', saveComodidade);
 routes.put('/comodidade/:id', updateComodidade)
 routes.delete('/comodidade/:id', deleteComodidade)
 
-routes.get('/hospede', getHospedes);
-routes.get('/hospede/:id', getHospede);
-routes.post('/hospede', saveHospede);
-routes.put('/hospede/:id', updateHospede)
-routes.delete('/hospede/:id', deleteHospede)
+routes.get('/quarto', getQuartos);
+routes.get('/quarto/:id', getQuarto);
+routes.post('/quarto', saveQuarto);
+routes.put('/quarto/:id', updateQuarto)
+routes.delete('/quarto/:id', deleteQuarto)
+routes.patch('/quarto/:id', bookQuarto)
 
 routes.get('/servico', getServicos);
 routes.get('/servico/:id', getOneServico);
@@ -40,11 +40,16 @@ routes.post('/servico', saveServico);
 routes.put('/servico/:id', updateServico)
 routes.delete('/servico/:id', deleteServico)
 
-routes.get('/conta', getConta);
-routes.get('/conta/:id', getOneConta);
-routes.post('/conta', saveConta);
-routes.put('/conta/:id', updateConta)
-routes.delete('/conta/:id', deleteConta)
+routes.get('/hospede', getHospedes);
+routes.get('/hospede/:id', getHospede);
+routes.post('/hospede', saveHospede);
+routes.put('/hospede/:id', updateHospede)
+routes.delete('/hospede/:id', deleteHospede)
 
+// routes.get('/conta', getConta);
+// routes.get('/conta/:id', getOneConta);
+// routes.post('/conta', saveConta);
+// routes.put('/conta/:id', updateConta)
+// routes.delete('/conta/:id', deleteConta)
 
 export default routes

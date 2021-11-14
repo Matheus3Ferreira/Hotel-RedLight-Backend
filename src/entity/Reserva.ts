@@ -4,14 +4,24 @@ import {
     Column,
     CreateDateColumn,
     UpdateDateColumn,
+    ManyToOne,
+    JoinColumn,
 
 } from "typeorm";
+import { Hospede } from "./Hospede";
 
 @Entity()
 export class Reserva {
 
     @PrimaryGeneratedColumn()
     idReserva: string;
+
+    @Column()
+    idHospede: number;
+
+    @ManyToOne(type => Hospede, reservas => Reserva, { eager: true})
+    @JoinColumn({name: "idHospede"})
+    hospede: Hospede;
 
     @Column()
     adultos: number;

@@ -6,7 +6,6 @@ require("dotenv").config();
 
 
 const hostname = 'localhost';
-const port = 3333;
 // const config: any = {
 //     "type": process.env.DB_DIALECT,
 //     "host": process.env.DB_HOST,
@@ -31,13 +30,12 @@ const port = 3333;
 //        "subscribersDir": "src/subscriber"
 //     }
 //  }
-
 const app = express()
 createConnection()
 
 app.use(express.json())
 app.use("/api", routes)
 
-app.listen(process.env.PORT || port, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
+app.listen(process.env.PORT || 3333, () => {
+    console.log(`Server running at http://${hostname}:3333/`);
 });
