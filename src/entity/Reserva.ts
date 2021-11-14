@@ -35,6 +35,9 @@ export class Reserva {
     @Column()
     checkOut: Date;
 
+    @Column({default: true})
+    ativo: boolean;
+
     @CreateDateColumn()
     created_at: Date;
 

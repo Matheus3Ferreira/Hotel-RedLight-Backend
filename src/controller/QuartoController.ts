@@ -49,12 +49,3 @@ export const bookQuarto = async (request: Request, response: Response) => {
         return response.status(404).json({ message: "Quarto não localizado." });
 }  
 
-
-// Retornar um response com status
-// Se o status for um sucesso 
-//     json
-//     200,
-//     Quarto
-// Não 
-//     404
-

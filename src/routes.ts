@@ -5,34 +5,34 @@ import { deleteComodidade, getComodidade, getComodidades, saveComodidade, update
 import { deleteQuarto, getQuartos, getQuarto, saveQuarto, updateQuarto, bookQuarto } from './controller/QuartoController'
 import { deleteHospede, getHospede, getHospedes, saveHospede, updateHospede } from './controller/HospedeController';
 import { deleteServico, getOneServico, getServicos, saveServico, updateServico } from './controller/ServicoController'
-// import { deleteConta, getConta, getOneConta, saveConta, updateConta } from './controller/ContaController';
+import { deleteReserva, getReserva, getReservas, inactiveReserva, saveReserva, updateReserva } from './controller/ReservaController';
 
-const routes = Router()
+const routes = Router();
 
 routes.get('/ocupacao', getOcupacoes);
 routes.get('/ocupacao/:id', getOcupacao);
 routes.post('/ocupacao', saveOcupacao);
-routes.put('/ocupacao/:id', updateOcupacao)
-routes.delete('/ocupacao/:id', deleteOcupacao)
+routes.put('/ocupacao/:id', updateOcupacao);
+routes.delete('/ocupacao/:id', deleteOcupacao);
 
 routes.get('/funcionario', getFuncionarios);
 routes.get('/funcionario/:id', getFuncionario);
 routes.post('/funcionario', saveFuncionario);
-routes.put('/funcionario/:id', updateFuncionario)
-routes.delete('/funcionario/:id', deleteFuncionario)
+routes.put('/funcionario/:id', updateFuncionario);
+routes.delete('/funcionario/:id', deleteFuncionario);
 
 routes.get('/comodidade', getComodidades);
 routes.get('/comodidade/:id', getComodidade);
 routes.post('/comodidade', saveComodidade);
-routes.put('/comodidade/:id', updateComodidade)
-routes.delete('/comodidade/:id', deleteComodidade)
+routes.put('/comodidade/:id', updateComodidade);
+routes.delete('/comodidade/:id', deleteComodidade);
 
 routes.get('/quarto', getQuartos);
 routes.get('/quarto/:id', getQuarto);
 routes.post('/quarto', saveQuarto);
-routes.put('/quarto/:id', updateQuarto)
-routes.delete('/quarto/:id', deleteQuarto)
-routes.patch('/quarto/:id', bookQuarto)
+routes.put('/quarto/:id', updateQuarto);
+routes.delete('/quarto/:id', deleteQuarto);
+routes.patch('/quarto/:id', bookQuarto);
 
 routes.get('/servico', getServicos);
 routes.get('/servico/:id', getOneServico);
@@ -43,13 +43,15 @@ routes.delete('/servico/:id', deleteServico)
 routes.get('/hospede', getHospedes);
 routes.get('/hospede/:id', getHospede);
 routes.post('/hospede', saveHospede);
-routes.put('/hospede/:id', updateHospede)
-routes.delete('/hospede/:id', deleteHospede)
+routes.put('/hospede/:id', updateHospede);
+routes.delete('/hospede/:id', deleteHospede);
 
-// routes.get('/conta', getConta);
-// routes.get('/conta/:id', getOneConta);
-// routes.post('/conta', saveConta);
-// routes.put('/conta/:id', updateConta)
-// routes.delete('/conta/:id', deleteConta)
+routes.get('/reserva', getReservas);
+routes.get('/reserva/:id', getReserva);
+routes.post('/reserva', saveReserva);
+routes.put('/reserva/:id', updateReserva);
+routes.delete('/reserva/:id', deleteReserva);
+routes.patch('/reserva/:id', inactiveReserva);
+
 
 export default routes
