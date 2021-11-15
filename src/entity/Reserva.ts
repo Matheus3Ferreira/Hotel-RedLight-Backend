@@ -6,9 +6,11 @@ import {
     UpdateDateColumn,
     ManyToOne,
     JoinColumn,
+    OneToMany,
 
 } from "typeorm";
 import { Hospede } from "./Hospede";
+import { Quarto } from "./Quarto";
 
 @Entity()
 export class Reserva {
@@ -16,12 +18,12 @@ export class Reserva {
     @PrimaryGeneratedColumn()
     idReserva: string;
 
-    @Column()
-    idHospede: number;
-
-    @ManyToOne(type => Hospede, reservas => Reserva, { eager: true})
+    @ManyToOne(type => Hospede, reservas => Reserva, { eager: true })
     @JoinColumn({name: "idHospede"})
     hospede: Hospede;
+
+    @OneToMany(type => Quarto, reserva => Reserva)
+    quartos: Quarto[];
 
     @Column()
     adultos: number;

@@ -1,7 +1,7 @@
 import { getRepository } from 'typeorm';
 import { Quarto } from '../entity/Quarto';
 import { Request, Response } from 'express';
-import { json } from 'body-parser';
+import { HttpResponse } from './response'
 
 export const getQuartos = async (request: Request, response: Response) => {
     const quarto = await getRepository(Quarto).find({relations: ['comodidades']});

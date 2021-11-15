@@ -1,6 +1,7 @@
 import { getRepository } from 'typeorm';
 import { Reserva } from '../entity/Reserva';
 import { Request, Response } from 'express';
+import { HttpResponse } from './response'
 
 export const getReservas = async (request: Request, response: Response) => {
     const reserva = await getRepository(Reserva).find();

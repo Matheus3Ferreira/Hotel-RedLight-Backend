@@ -1,6 +1,7 @@
 import { getRepository } from 'typeorm';
 import { Hospede } from '../entity/Hospede';
 import { Request, Response } from 'express';
+import { HttpResponse } from './response'
 
 export const getHospedes = async (request: Request, response: Response) => {
     const hospede = await getRepository(Hospede).find();

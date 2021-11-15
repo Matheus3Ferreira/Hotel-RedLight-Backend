@@ -1,6 +1,7 @@
 {
    "name": "hotel-red-light-backend",
    "version": "0.0.1",
+   "license": "MIT",
    "description": "Um sistema de gerenciamento de registros de um hotel, e de suas reservas.",
    "devDependencies": {
       "@types/node": "^8.0.29",
@@ -11,6 +12,7 @@
    "dependencies": {
       "@types/express": "^4.17.13",
       "body-parser": "^1.18.1",
+      "cors": "^2.8.5",
       "dotenv": "^10.0.0",
       "express": "^4.15.4",
       "pg": "^8.4.0",
@@ -19,8 +21,9 @@
       "typeorm": "0.2.37"
    },
    "scripts": {
+      "build": "tsc -p .",
       "dev": "nodemon src/index.ts",
-      "start": "ts-node src/index.ts",
+      "start": "cd dist && node src/index.js",
       "typeorm": "ts-node ./node_modules/typeorm/cli.js"
    }
 }

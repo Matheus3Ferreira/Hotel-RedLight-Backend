@@ -6,9 +6,12 @@ import {
     UpdateDateColumn,
     ManyToMany,
     JoinTable,
+    ManyToOne,
+    JoinColumn,
 
 } from "typeorm";
 import { Comodidade } from "./Comodidade";
+import { Reserva } from "./Reserva";
 
 @Entity()
 export class Quarto {
@@ -16,9 +19,16 @@ export class Quarto {
     @PrimaryGeneratedColumn()
     numeroQuarto: number;
 
+    @Column()
+    idReserva: number;
+
     @ManyToMany(() => Comodidade)
     @JoinTable()
     comodidades: Comodidade;
+
+    @ManyToOne(type => Reserva, quartos => Quarto, {eager: true})
+    @JoinColumn({ name: "idReserva"})
+    reserva: Reserva;
 
     @Column()
     nome: string;
