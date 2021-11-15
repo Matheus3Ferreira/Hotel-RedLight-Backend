@@ -35,8 +35,8 @@ createConnection(config)
 
 app.use(cors())
 app.use(express.json())
-app.use("/api", routes)
+app.use(routes)
 
-app.listen(process.env.PORT || 8080, () => {
-    console.log(`Server running at http://${hostname}:8080/`);
+app.listen(process.env.PORT || 3333, () => {
+    console.log(`Server running at http://${hostname}:3333/`);
 });
