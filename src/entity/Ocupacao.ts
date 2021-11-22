@@ -5,7 +5,7 @@ import { Funcionario } from "./Funcionario";
 export class Ocupacao {
 
     @PrimaryGeneratedColumn()
-    idOcupacao: string;
+    idOcupacao: number;
 
     @OneToMany(type => Funcionario, ocupacao => Ocupacao)
     funcionarios: Funcionario[];

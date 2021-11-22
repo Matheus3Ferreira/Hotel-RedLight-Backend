@@ -14,7 +14,7 @@ import { Ocupacao } from './Ocupacao'
 export class Funcionario {
 
     @PrimaryGeneratedColumn()
-    idFuncionario: string;
+    idFuncionario: number;
 
     @Column()
     idOcupacao: number;

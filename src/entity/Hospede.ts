@@ -13,7 +13,7 @@ import { Reserva } from "./Reserva";
 export class Hospede {
 
     @PrimaryGeneratedColumn()
-    idHospede: string;
+    idHospede: number;
 
     @OneToMany(type => Reserva, hospede => Hospede)
     reservas: Reserva[];

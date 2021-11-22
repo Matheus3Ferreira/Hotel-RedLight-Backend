@@ -13,7 +13,7 @@ import { Hospede } from "./Hospede";
 export class NotaFiscal {
 
     @PrimaryGeneratedColumn()
-    idNotaFiscal: string;
+    idNotaFiscal: number;
 
     @Column()
     idHospede: number;

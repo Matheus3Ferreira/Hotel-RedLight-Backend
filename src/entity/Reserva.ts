@@ -16,7 +16,7 @@ import { Quarto } from "./Quarto";
 export class Reserva {
 
     @PrimaryGeneratedColumn()
-    idReserva: string;
+    idReserva: number;
 
     @Column()
     idHospede: number;

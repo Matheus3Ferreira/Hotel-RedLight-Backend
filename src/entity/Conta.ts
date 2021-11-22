@@ -12,7 +12,7 @@ import { Servico } from "./Servico";
 export class Conta {
 
     @PrimaryGeneratedColumn()
-    idConta: string;
+    idConta: number;
 
     // @OneToMany(() => Servico, conta => Conta, { eager: true })
     // servicos: Servico[];
