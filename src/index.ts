@@ -30,12 +30,13 @@ const config: any = {
        "subscribersDir": "src/subscriber"
     }
  }
+
 const app = express()
 createConnection(config)
 
 app.use(cors())
 app.use(express.json())
-app.use(routes)
+app.use("/api", routes)
 
 app.listen(process.env.PORT || 3333, () => {
     console.log(`Server running at http://${hostname}:3333/`);

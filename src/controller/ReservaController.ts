@@ -2,9 +2,10 @@ import { getRepository } from 'typeorm';
 import { Reserva } from '../entity/Reserva';
 import { Request, Response } from 'express';
 import { HttpResponse } from './response'
+import { Quarto } from '../entity/Quarto';
 
 export const getReservas = async (request: Request, response: Response) => {
-    const reserva = await getRepository(Reserva).find();
+    const reserva = await getRepository(Reserva).find({relations: ["quartos"]});
     return response.json(reserva);
 }
 
@@ -15,7 +16,10 @@ export const getReserva = async (request: Request, response: Response) => {
 };
 
 export const saveReserva = async (request: Request, response: Response) => {
+    const {quartos} = request.body;
+    
     const reserva = await getRepository(Reserva).save(request.body);
+
     return response.status(201).json(reserva);
 }
 

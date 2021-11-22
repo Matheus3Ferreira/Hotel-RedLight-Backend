@@ -19,15 +19,15 @@ export class Quarto {
     @PrimaryGeneratedColumn()
     numeroQuarto: number;
 
-    @Column()
+    @Column({nullable: true})
     idReserva: number;
 
     @ManyToMany(() => Comodidade)
     @JoinTable()
     comodidades: Comodidade;
 
-    @ManyToOne(type => Reserva, quartos => Quarto, {eager: true})
-    @JoinColumn({ name: "idReserva"})
+    @ManyToOne(type => Reserva, quartos => Quarto)
+    @JoinColumn({name: "idReserva"})
     reserva: Reserva;
 
     @Column()
@@ -38,9 +38,6 @@ export class Quarto {
 
     @Column("decimal", { scale: 2 })
     valorDiaria: number;
-    
-    @Column({ default: true })
-    disponivel: Boolean;
 
     @CreateDateColumn()
     created_at: Date;

@@ -18,6 +18,9 @@ export class Reserva {
     @PrimaryGeneratedColumn()
     idReserva: string;
 
+    @Column()
+    idHospede: number;
+
     @ManyToOne(type => Hospede, reservas => Reserva, { eager: true })
     @JoinColumn({name: "idHospede"})
     hospede: Hospede;
@@ -28,7 +31,7 @@ export class Reserva {
     @Column()
     adultos: number;
     
-    @Column()
+    @Column({default: 0})
     criancas: number;
     
     @Column()
