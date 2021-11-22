@@ -1,15 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany, JoinColumn, ManyToOne, ManyToMany } from "typeorm";
-import { Conta } from "./Conta";
-import { Funcionario } from "./Funcionario";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany } from "typeorm";
+import { Consumo } from "./Consumo";
 
 @Entity()
 export class Servico {
 
     @PrimaryGeneratedColumn()
-    idServico: string;
+    idServico: number;
 
-    // @ManyToOne(() => Conta, servicos => servicos)
-    // conta: Conta;
+    @OneToMany(type => Consumo, servico => Servico)
+    consumos: Consumo[];
 
     @Column()
     nome: string;
