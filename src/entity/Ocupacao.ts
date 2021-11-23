@@ -13,7 +13,7 @@ export class Ocupacao {
     @Column()
     nome: string;
  
-    @Column("decimal", {scale: 2})
+    @Column("float", {scale: 2})
     salario: number;
 
     @CreateDateColumn()

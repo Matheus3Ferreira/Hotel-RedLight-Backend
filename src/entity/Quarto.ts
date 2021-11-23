@@ -36,7 +36,7 @@ export class Quarto {
     @Column()
     descricao: string;
 
-    @Column("decimal", { scale: 2 })
+    @Column("float", { scale: 2 })
     valorDiaria: number;
 
     @CreateDateColumn()
