@@ -16,7 +16,7 @@ export class Servico {
     @Column()
     descricao: string;
 
-    @Column("decimal", { scale: 2 })
+    @Column("float", { scale: 2 })
     valor: number;
 
     @CreateDateColumn()

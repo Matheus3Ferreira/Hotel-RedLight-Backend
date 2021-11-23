@@ -6,6 +6,7 @@ import { deleteQuarto, getQuartos, getQuarto, saveQuarto, updateQuarto } from '.
 import { deleteHospede, getHospede, getHospedes, saveHospede, updateHospede } from './controller/HospedeController';
 import { deleteServico, getOneServico, getServicos, saveServico, updateServico } from './controller/ServicoController'
 import { deleteReserva, getReserva, getReservas, inactiveReserva, saveReserva, updateReserva } from './controller/ReservaController';
+import { deleteConsumo, getConsumos, getOneConsumo, saveConsumo, updateConsumo } from './controller/ConsumoController'
 
 const routes = Router();
 
@@ -33,12 +34,6 @@ routes.post('/quarto', saveQuarto);
 routes.put('/quarto/:id', updateQuarto);
 routes.delete('/quarto/:id', deleteQuarto);
 
-routes.get('/servico', getServicos);
-routes.get('/servico/:id', getOneServico);
-routes.post('/servico', saveServico);
-routes.put('/servico/:id', updateServico)
-routes.delete('/servico/:id', deleteServico)
-
 routes.get('/hospede', getHospedes);
 routes.get('/hospede/:id', getHospede);
 routes.post('/hospede', saveHospede);
@@ -52,5 +47,16 @@ routes.put('/reserva/:id', updateReserva);
 routes.delete('/reserva/:id', deleteReserva);
 routes.patch('/reserva/:id', inactiveReserva);
 
+routes.get('/servico', getServicos);
+routes.get('/servico/:id', getOneServico);
+routes.post('/servico', saveServico);
+routes.put('/servico/:id', updateServico)
+routes.delete('/servico/:id', deleteServico)
+
+routes.get('/consumo', getConsumos);
+routes.get('/consumo/:id', getOneConsumo);
+routes.post('/consumo', saveConsumo);
+routes.put('/consumo/:id', updateConsumo)
+routes.delete('/consumo/:id', deleteConsumo)
 
 export default routes

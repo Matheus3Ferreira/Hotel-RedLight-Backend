@@ -17,7 +17,7 @@ export class Consumo {
     @Column()
     quantidade: number;
 
-    @Column("decimal", {scale: 2})
+    @Column("float", {scale: 2})
     valorTotal: number;
 
     @CreateDateColumn()
