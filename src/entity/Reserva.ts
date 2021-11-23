@@ -9,6 +9,7 @@ import {
     OneToMany,
 
 } from "typeorm";
+import { Conta } from "./Conta";
 import { Hospede } from "./Hospede";
 import { Quarto } from "./Quarto";
 
@@ -27,6 +28,9 @@ export class Reserva {
 
     @OneToMany(type => Quarto, reserva => Reserva)
     quartos: Quarto[];
+
+    @OneToMany(type => Conta, reserva => Reserva)
+    contas: Conta[];
 
     @Column()
     adultos: number;
