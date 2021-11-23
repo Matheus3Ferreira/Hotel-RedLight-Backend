@@ -4,9 +4,10 @@ import {
     Column,
     CreateDateColumn,
     UpdateDateColumn,
-    OneToMany,
+    ManyToMany,
+    JoinTable,
 } from "typeorm";
-import { Servico } from "./Servico";
+import { Consumo } from "./Consumo";
 
 @Entity()
 export class Conta {
@@ -14,13 +15,14 @@ export class Conta {
     @PrimaryGeneratedColumn()
     idConta: number;
 
-    // @OneToMany(() => Servico, conta => Conta, { eager: true })
-    // servicos: Servico[];
-
+    @ManyToMany(() => Consumo)
+    @JoinTable()
+    consumos: Consumo;
+  
     @Column()
     data: Date;
 
-    @Column("decimal")
+    @Column("float")
     valorTotal: number;
 
     @CreateDateColumn()
