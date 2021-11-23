@@ -1,11 +1,12 @@
 import { getRepository } from 'typeorm';
 import { Hospede } from '../entity/Hospede';
 import { Request, Response } from 'express';
-import { HttpResponse } from './response'
+import { HttpResponse } from './response';
+
 
 export const getHospedes = async (request: Request, response: Response) => {
     const hospede = await getRepository(Hospede).find();
-    return response.json(hospede);
+    return response.json(new HttpResponse<Hospede[]>(hospede, 200, 'Lista de Hospedes'));
 }
 
 export const getHospede = async (request: Request, response: Response) => {
