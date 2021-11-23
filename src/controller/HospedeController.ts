@@ -12,7 +12,7 @@ export const getHospedes = async (request: Request, response: Response) => {
 export const getHospede = async (request: Request, response: Response) => {
     const { id } = request.params
     const hospede = await getRepository(Hospede).findOne(id)
-    return hospede == undefined ? response.status(404).json('Hospede não localizado.') : response.json(hospede);
+    return hospede == undefined ? response.status(404).json(new HttpResponse<Hospede>(hospede, 404, 'Hospede não localizado.')) : response.json(new HttpResponse<Hospede>(hospede, 200, 'Hospede localizado.'));
 };
 
 export const saveHospede = async (request: Request, response: Response) => {
