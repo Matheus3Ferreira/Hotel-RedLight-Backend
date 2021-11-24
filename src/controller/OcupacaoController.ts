@@ -5,18 +5,18 @@ import { HttpResponse } from './response'
 
 export const getOcupacoes = async (request: Request, response: Response) => {
     const ocupacao = await getRepository(Ocupacao).find();
-    return response.json(ocupacao);
+    return response.status(200).json(new HttpResponse<Ocupacao[]>(ocupacao, 200, 'Lista de Ocupações.'));
 }
 
 export const getOcupacao = async (request: Request, response: Response) => {
     const { id } = request.params
     const ocupacao = await getRepository(Ocupacao).findOne(id)
-    return ocupacao == undefined ? response.status(404).json('Usuário não localizado.') : response.json(ocupacao);
+    return ocupacao == undefined ? response.status(404).json(new HttpResponse<Ocupacao>(null, 404, 'Ocupação não localizada.')) : response.status(200).json(new HttpResponse<Ocupacao>(ocupacao, 200, 'Ocupação localizada.'));
 };
 
 export const saveOcupacao = async (request: Request, response: Response) => {
     const ocupacao = await getRepository(Ocupacao).save(request.body);
-    return response.status(201).json(ocupacao);
+    return response.status(201).json(new HttpResponse<Ocupacao>(ocupacao, 201, 'Ocupação salva com sucesso.'));
 }
 
 export const updateOcupacao = async (request: Request, response: Response) => {
@@ -25,10 +25,10 @@ export const updateOcupacao = async (request: Request, response: Response) => {
 
     if (ocupacao.affected == 1) {
         const ocupacaoUpdated = await getRepository(Ocupacao).findOne(id)
-        return response.json(ocupacaoUpdated);
+        return response.json(new HttpResponse<Ocupacao>(ocupacaoUpdated, 200, 'Ocupação alterada com sucesso.'));
     }
     else {
-        return response.status(404).json({ message: 'Ocupação não encontrada!' })
+        return response.status(404).json(new HttpResponse<Ocupacao>(null, 404, 'Ocupação não localizada.'))
     }
 };
 
@@ -37,9 +37,9 @@ export const deleteOcupacao = async (request: Request, response: Response) => {
     const ocupacao = await getRepository(Ocupacao).delete(id)
 
     if (ocupacao.affected == 1) {
-        return response.status(200).json({ message: "Ocupação excluída com sucesso!" });
+        return response.status(200).json(new HttpResponse<Ocupacao>(null, 204, 'Ocupação excluida com sucesso.'));
     }
     else {
-        return response.status(404).json({ message: 'Ocupação não encontrada!' })
+        return response.status(404).json(new HttpResponse<Ocupacao>(null, 404, 'Ocupação não localizada.'))
     }
 };
