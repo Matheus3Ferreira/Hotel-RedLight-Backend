@@ -27,19 +27,24 @@ export const saveFuncionario = async (request: Request, response: Response) => {
 
     const funcionario = await getRepository(Funcionario).save(request.body);
 
-    return response.status(201).json(funcionario);
+    return response.status(201).json(new HttpResponse<Funcionario>(funcionario, 201, 'Funcionário salvo com sucesso'));
 }
 
 export const updateFuncionario = async (request: Request, response: Response) => {
     const { id } = request.params
     const funcionario = await getRepository(Funcionario).update(id, request.body)
 
+    if (request.body.senha == ""){
+        const {senha} = await getRepository(Funcionario).findOne(id);
+        request.body.senha = senha;
+    }
+
     if (funcionario.affected == 1) {
         const funcionarioUpdated = await getRepository(Funcionario).findOne(id)
-        return response.json(funcionarioUpdated);
+        return response.json(new HttpResponse<Funcionario>(funcionarioUpdated, 201, 'Funcionário salvo com sucesso'));
     }
     else {
-        return response.status(404).json({ message: 'Funcionario não encontrado!' })
+        return response.status(404).json(new HttpResponse<Funcionario>(null, 404, 'Funcionário não localizado'))
     }
 };
 
@@ -48,9 +53,9 @@ export const deleteFuncionario = async (request: Request, response: Response) =>
     const funcionario = await getRepository(Funcionario).delete(id)
 
     if (funcionario.affected == 1) {
-        return response.status(200).json({ message: "Funcionario excluído com sucesso!" });
+        return response.status(204).json(new HttpResponse<Funcionario>(null, 204, 'Funcionário deletado com sucesso'));
     }
     else {
-        return response.status(404).json({ message: 'Funcionario não encontrado!' })
+        return response.status(404).json(new HttpResponse<Funcionario>(null, 404, 'Funcionário não localizado'))
     }
 };
