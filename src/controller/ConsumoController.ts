@@ -2,16 +2,17 @@ import { getRepository } from 'typeorm';
 import { Consumo } from '../entity/Consumo';
 import { Request, Response } from 'express';
 import { Servico } from '../entity/Servico';
+import { HttpResponse } from './response';
 
 export const getConsumos = async (request: Request, response: Response) => {
     const consumo = await getRepository(Consumo).find();
-    return response.json(consumo);
+    return response.status(200).json(new HttpResponse<Consumo[]>(consumo, 200, 'Listagem de Consumos'));
 }
 
 export const getOneConsumo = async (request: Request, response: Response) => {
     const { id } = request.params;
     const consumo = await getRepository(Consumo).findOne(id);
-    return consumo == undefined ? response.status(404).json('Consumo não localizado.') : response.json(consumo);
+    return consumo == undefined ? response.status(404).json(new HttpResponse<Consumo>(consumo, 404, 'Consumo não localizado')) : response.status(200).json(new HttpResponse<Consumo>(consumo, 200, 'Consumo localizado'));
 };
 
 export const saveConsumo = async (request: Request, response: Response) => {
@@ -19,7 +20,7 @@ export const saveConsumo = async (request: Request, response: Response) => {
     const {valor} = await getRepository(Servico).findOne(idServico);
     request.body.valorTotal = valor * quantidade;
     const consumo = await getRepository(Consumo).save(request.body);
-    return response.status(201).json(consumo);
+    return response.status(201).json(new HttpResponse<Consumo>(consumo, 201, 'Consumo criado.'));
 }
 
 export const updateConsumo = async (request: Request, response: Response) => {
@@ -28,10 +29,10 @@ export const updateConsumo = async (request: Request, response: Response) => {
 
     if (consumo.affected == 1) {
         const servicoUpdated = await getRepository(Consumo).findOne(id)
-        return response.json(servicoUpdated);
+        return response.status(200).json(new HttpResponse<Consumo>(servicoUpdated, 200, 'Consumo alterado com sucesso'));
     }
     else {
-        return response.status(404).json({ message: 'Consumo não encontrado!' })
+        return response.status(404).json(new HttpResponse<Consumo>(null, 404, 'Consumo não localizado'))
     }
 };
 
