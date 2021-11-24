@@ -2,11 +2,12 @@ import { getRepository } from 'typeorm';
 import { Funcionario } from '../entity/Funcionario';
 import { Request, Response } from 'express';
 import { hash } from 'bcrypt';
+import { HttpResponse } from './response';
 
 
 export const getFuncionarios = async (request: Request, response: Response) => {
     const funcionario = await getRepository(Funcionario).find({order: {idFuncionario: "ASC"}});
-    return response.json(funcionario);
+    return response.json(new HttpResponse<Funcionario[]>(funcionario, 200, 'Lista de Funcionarios'));
 }
 
 export const getFuncionario = async (request: Request, response: Response) => {
@@ -15,7 +16,7 @@ export const getFuncionario = async (request: Request, response: Response) => {
 
     funcionario.senha = "";
 
-    return funcionario == undefined ? response.status(404).json('Funcionário não localizado.') : response.json(funcionario);
+    return funcionario == undefined ? response.status(404).json(new HttpResponse<Funcionario>(null, 404, 'Funcionário não localizado')) : response.json(new HttpResponse<Funcionario>(funcionario, 200, 'Funcionario localizado'));
 };
 
 export const saveFuncionario = async (request: Request, response: Response) => {

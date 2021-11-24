@@ -6,6 +6,11 @@ import { hash } from 'bcrypt'
 
 export const getHospedes = async (request: Request, response: Response) => {
     const hospede = await getRepository(Hospede).find({order: {idHospede: "ASC"}});
+
+    hospede.forEach((hospede) => {
+        hospede.senha = ""
+    })
+
     return response.json(new HttpResponse<Hospede[]>(hospede, 200, 'Lista de Hospedes'));
 }
 
