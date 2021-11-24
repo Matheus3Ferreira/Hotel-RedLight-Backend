@@ -12,6 +12,9 @@ export const getFuncionarios = async (request: Request, response: Response) => {
 export const getFuncionario = async (request: Request, response: Response) => {
     const { id } = request.params
     const funcionario = await getRepository(Funcionario).findOne(id)
+
+    funcionario.senha = "";
+
     return funcionario == undefined ? response.status(404).json('Funcionário não localizado.') : response.json(funcionario);
 };
 
