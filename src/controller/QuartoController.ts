@@ -3,17 +3,18 @@ import { Quarto } from '../entity/Quarto';
 import { Request, Response } from 'express';
 
 export const getQuartos = async (request: Request, response: Response) => {
-    const quarto = await getRepository(Quarto).find();
+    const quarto = await getRepository(Quarto).find({relations: ['comodidades']});
     return response.json(quarto);
 }
 
 export const getQuarto = async (request: Request, response: Response) => {
     const { id } = request.params
-    const quarto = await getRepository(Quarto).findOne(id);
+    const quarto = await getRepository(Quarto).findOne(id, {relations: ['comodidades']});
     return quarto == undefined ? response.status(404).json('Quarto não localizado.') : response.status(200).json(quarto);
 };
 
 export const saveQuarto = async (request: Request, response: Response) => {
+
     const quarto = await getRepository(Quarto).save(request.body);
     return response.status(201).json(quarto);
 }

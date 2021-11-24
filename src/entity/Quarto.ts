@@ -39,6 +39,9 @@ export class Quarto {
     @Column("float", { scale: 2 })
     valorDiaria: number;
 
+    @Column()
+    imagem: string;
+
     @CreateDateColumn()
     created_at: Date;
 
