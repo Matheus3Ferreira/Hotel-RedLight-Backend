@@ -7,6 +7,11 @@ import { HttpResponse } from './response';
 
 export const getFuncionarios = async (request: Request, response: Response) => {
     const funcionario = await getRepository(Funcionario).find({order: {idFuncionario: "ASC"}});
+
+    funcionario.forEach((funcionario) => {
+        funcionario.senha = "";
+    })
+
     return response.json(new HttpResponse<Funcionario[]>(funcionario, 200, 'Lista de Funcionarios'));
 }
 
