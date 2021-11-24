@@ -1,11 +1,11 @@
 import { getRepository } from 'typeorm';
 import { Funcionario } from '../entity/Funcionario';
 import { Request, Response } from 'express';
-import { HttpResponse } from './response'
+import { hash } from 'bcrypt';
 
 
 export const getFuncionarios = async (request: Request, response: Response) => {
-    const funcionario = await getRepository(Funcionario).find();
+    const funcionario = await getRepository(Funcionario).find({order: {idFuncionario: "ASC"}});
     return response.json(funcionario);
 }
 
@@ -16,7 +16,13 @@ export const getFuncionario = async (request: Request, response: Response) => {
 };
 
 export const saveFuncionario = async (request: Request, response: Response) => {
+
+    const hashPassword = await hash(request.body.senha, 10)
+
+    request.body.senha = hashPassword;
+
     const funcionario = await getRepository(Funcionario).save(request.body);
+
     return response.status(201).json(funcionario);
 }
 

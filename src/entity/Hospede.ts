@@ -6,8 +6,8 @@ import {
     UpdateDateColumn,
     OneToMany,
 } from "typeorm";
-import { NotaFiscal } from "./NotaFiscal";
 import { Reserva } from "./Reserva";
+
 
 @Entity()
 export class Hospede {
