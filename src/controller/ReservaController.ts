@@ -1,33 +1,31 @@
 import { getRepository } from 'typeorm';
 import { Reserva } from '../entity/Reserva';
 import { Request, Response } from 'express';
-import { HttpResponse } from './response'
-import { Quarto } from '../entity/Quarto';
+import { HttpResponse } from './response';
 
 export const getReservas = async (request: Request, response: Response) => {
     const reserva = await getRepository(Reserva).find({relations: ["quartos"]});
-    return response.json(reserva);
+    return response.status(200).json(new HttpResponse<Reserva[]>(reserva, 200, 'Reservas listadas'));
 }
 
 export const getReserva = async (request: Request, response: Response) => {
     const { id } = request.params
     const reserva = await getRepository(Reserva).findOne(id)
-    return reserva == undefined ? response.status(404).json('Reserva não localizada.') : response.status(200).json(reserva);
+    return reserva == undefined ? response.status(404).json(new HttpResponse<Reserva>(null, 404, 'Reserva não localizada listadas')) : response.status(200).json(new HttpResponse<Reserva>(reserva, 200, 'Reserva localizada'));
 };
 
 export const saveReserva = async (request: Request, response: Response) => {
-    const {quartos} = request.body;
     
     const reserva = await getRepository(Reserva).save(request.body);
 
-    return response.status(201).json(reserva);
+    return response.status(201).json(new HttpResponse<Reserva>(reserva, 201, 'Reserva localizada'));
 }
 
 export const updateReserva = async (request: Request, response: Response) => {
     const { id } = request.params
     const reserva = await getRepository(Reserva).update(id, request.body)
 
-    return reserva.affected == 1 ? response.status(200).json('Reserva alterada com sucesso.') : response.status(404).json('Reserva não localizada.')
+    return reserva.affected == 1 ? response.status(200).json(new HttpResponse<Reserva>(null, 200, 'Reserva alterada com sucesso.')) : response.status(404).json(new HttpResponse<Reserva>(null, 404, 'Reserva não localizada '))
 
 };
 
@@ -35,20 +33,6 @@ export const deleteReserva = async (request: Request, response: Response) => {
     const { id } = request.params
     const reserva = await getRepository(Reserva).delete(id)
 
-    return reserva.affected == 1 ? response.status(200).json('Reserva excluída com sucesso.') : response.status(404).json('Reserva não localizada.')
+    return reserva.affected == 1 ? response.status(204).json(new HttpResponse<Reserva>(null, 204, 'Reserva excluida com sucesso.')) : response.status(404).json(new HttpResponse<Reserva>(null, 404, 'Reserva não localizada '))
 
-};
-
-export const inactiveReserva = async (request: Request, response: Response) => {
-    const { id } = request.params;
-
-    const { ativo } = await getRepository(Reserva).findOne(id);
-    const reserva = await getRepository(Reserva).update(id, {ativo: !ativo});
-
-    if (reserva.affected == 1) {
-        const inactiveReserva = await getRepository(Reserva).findOne(id);
-        return response.status(200).json(inactiveReserva);
-    }
-    else
-        return response.status(404).json({ message: "Reserva não localizada." });
 };
