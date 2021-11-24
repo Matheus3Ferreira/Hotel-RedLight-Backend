@@ -32,7 +32,13 @@ export const saveHospede = async (request: Request, response: Response) => {
 
 export const updateHospede = async (request: Request, response: Response) => {
     const { id } = request.params
-    const hospede = await getRepository(Hospede).update(id, request.body)
+
+    if (request.body.senha == ""){
+        const { senha } = await getRepository(Hospede).findOne(id);
+        request.body.senha = senha;
+    }
+
+    const hospede = await getRepository(Hospede).update(id, request.body)  
     const newHospede = await getRepository(Hospede).findOne(id)
 
     return hospede.affected == 1 ? response.status(200).json(new HttpResponse<Hospede>(newHospede, 200, 'Hospede alterado com sucesso.')) : response.status(404).json(new HttpResponse<Hospede>(null, 404, 'Hospede não localizado.'))
