@@ -36,11 +36,6 @@ export class Hospede {
     
     @Column()
     cpf: string;
-    
-    // @Column({
-    //     unique: true
-    // })
-    // confirmationCode: string;
 
     @CreateDateColumn()
     created_at: Date;

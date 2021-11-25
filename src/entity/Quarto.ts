@@ -19,16 +19,9 @@ export class Quarto {
     @PrimaryGeneratedColumn()
     numeroQuarto: number;
 
-    @Column({nullable: true})
-    idReserva: number;
-
     @ManyToMany(() => Comodidade)
     @JoinTable()
     comodidades: Comodidade;
-
-    @ManyToOne(type => Reserva, quartos => Quarto)
-    @JoinColumn({name: "idReserva"})
-    reserva: Reserva;
 
     @Column()
     nome: string;

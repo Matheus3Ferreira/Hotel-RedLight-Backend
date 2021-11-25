@@ -7,9 +7,10 @@ import {
     ManyToOne,
     JoinColumn,
     OneToMany,
+    ManyToMany,
+    JoinTable,
 
 } from "typeorm";
-import { Conta } from "./Conta";
 import { Hospede } from "./Hospede";
 import { Quarto } from "./Quarto";
 
@@ -22,15 +23,13 @@ export class Reserva {
     @Column()
     idHospede: number;
 
-    @ManyToOne(type => Hospede, reservas => Reserva, { eager: true })
+    @ManyToOne(type => Hospede, reservas => Reserva, { eager: true})
     @JoinColumn({name: "idHospede"})
     hospede: Hospede;
 
-    @OneToMany(type => Quarto, reserva => Reserva)
-    quartos: Quarto[];
-
-    @OneToMany(type => Conta, reserva => Reserva)
-    contas: Conta[];
+    @ManyToMany(type => Quarto)
+    @JoinTable()
+    quartos: Quarto;
 
     @Column()
     adultos: number;

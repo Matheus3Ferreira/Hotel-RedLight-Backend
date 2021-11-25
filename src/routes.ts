@@ -7,8 +7,21 @@ import { deleteHospede, getHospede, getHospedes, saveHospede, updateHospede } fr
 import { deleteServico, getOneServico, getServicos, saveServico, updateServico } from './controller/ServicoController'
 import { deleteReserva, getReserva, getReservas, saveReserva, updateReserva } from './controller/ReservaController';
 import { deleteConsumo, getConsumos, getOneConsumo, saveConsumo, updateConsumo } from './controller/ConsumoController'
+import { authHospede, signupHospede } from './controller/authController';
+import tokenValidator from './middleware/TokenValidator';
 
 const routes = Router();
+
+// routes.use(tokenValidator)
+
+routes.post('/auth/signup', signupHospede);
+routes.post('/auth', authHospede);
+
+routes.get('/hospede', getHospedes);
+routes.get('/hospede/:id', getHospede);
+routes.post('/hospede', saveHospede);
+routes.put('/hospede/:id', updateHospede);
+routes.delete('/hospede/:id', deleteHospede);
 
 routes.get('/ocupacao', getOcupacoes);
 routes.get('/ocupacao/:id', getOcupacao);
@@ -34,12 +47,6 @@ routes.post('/quarto', saveQuarto);
 routes.put('/quarto/:id', updateQuarto);
 routes.delete('/quarto/:id', deleteQuarto);
 
-routes.get('/hospede', getHospedes);
-routes.get('/hospede/:id', getHospede);
-routes.post('/hospede', saveHospede);
-routes.put('/hospede/:id', updateHospede);
-routes.delete('/hospede/:id', deleteHospede);
-
 routes.get('/reserva', getReservas);
 routes.get('/reserva/:id', getReserva);
 routes.post('/reserva', saveReserva);
@@ -55,7 +62,7 @@ routes.delete('/servico/:id', deleteServico)
 routes.get('/consumo', getConsumos);
 routes.get('/consumo/:id', getOneConsumo);
 routes.post('/consumo', saveConsumo);
-routes.put('/consumo/:id', updateConsumo)
-routes.delete('/consumo/:id', deleteConsumo)
+routes.put('/consumo/:id', updateConsumo);
+routes.delete('/consumo/:id', deleteConsumo);
 
 export default routes

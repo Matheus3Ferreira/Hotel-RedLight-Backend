@@ -18,20 +18,16 @@ export class Conta {
     @PrimaryGeneratedColumn()
     idConta: number;
 
-
     @Column({nullable: true})
     idReserva: number;
-
 
     @ManyToMany(() => Consumo)
     @JoinTable()
     consumos: Consumo;
-    
 
     @JoinColumn({name: "idReserva"})
     @ManyToOne(type => Reserva, contas => Conta)
     reserva: Reserva;
-
 
     @Column({
         type: "float",
@@ -41,7 +37,6 @@ export class Conta {
 
     @CreateDateColumn()
     data: Date;
-
 
     @UpdateDateColumn()
     updated_at: Date;

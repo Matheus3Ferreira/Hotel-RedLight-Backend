@@ -33,8 +33,5 @@ export const deleteQuarto = async (request: Request, response: Response) => {
     const quarto = await getRepository(Quarto).delete(id)
 
     return quarto.affected == 1 ? response.status(200).json('Quarto excluído com sucesso.') : response.status(404).json('Quarto não localizado.')
-
 };
-
-
 
