@@ -26,6 +26,9 @@ export const getFuncionario = async (request: Request, response: Response) => {
 
 export const saveFuncionario = async (request: Request, response: Response) => {
 
+    if (await getRepository(Funcionario).findOne({ where: { email: request.body.email} })) 
+        return response.status(403).json(new HttpResponse<Funcionario>(null, 403, 'Email já cadastrado.'));
+
     const hashPassword = await hash(request.body.senha, 10)
 
     request.body.senha = hashPassword;
@@ -46,6 +49,7 @@ export const updateFuncionario = async (request: Request, response: Response) =>
 
     if (funcionario.affected == 1) {
         const funcionarioUpdated = await getRepository(Funcionario).findOne(id)
+        funcionarioUpdated.senha = "";
         return response.json(new HttpResponse<Funcionario>(funcionarioUpdated, 201, 'Funcionário salvo com sucesso'));
     }
     else {

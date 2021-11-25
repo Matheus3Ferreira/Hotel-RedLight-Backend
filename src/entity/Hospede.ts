@@ -8,6 +8,10 @@ import {
 } from "typeorm";
 import { Reserva } from "./Reserva";
 
+export enum UserStatus {
+    ACTIVE = "active",
+    PENDING = "pending",
+}
 
 @Entity()
 export class Hospede {
@@ -32,6 +36,11 @@ export class Hospede {
     
     @Column()
     cpf: string;
+    
+    // @Column({
+    //     unique: true
+    // })
+    // confirmationCode: string;
 
     @CreateDateColumn()
     created_at: Date;

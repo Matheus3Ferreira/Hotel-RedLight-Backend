@@ -26,6 +26,9 @@ export const getHospede = async (request: Request, response: Response) => {
 
 export const saveHospede = async (request: Request, response: Response) => {
 
+    if (await getRepository(Hospede).findOne({ where: { email: request.body.email} })) 
+        return response.status(403).json(new HttpResponse<Hospede>(null, 403, 'Email já cadastrado.'));  
+
     const hashPassword = await hash(request.body.senha, 10)
 
     request.body.senha = hashPassword;
@@ -43,10 +46,16 @@ export const updateHospede = async (request: Request, response: Response) => {
         request.body.senha = senha;
     }
 
-    const hospede = await getRepository(Hospede).update(id, request.body)  
-    const newHospede = await getRepository(Hospede).findOne(id)
+    const hospede = await getRepository(Hospede).update(id, request.body); 
+    const newHospede = await getRepository(Hospede).findOne(id);
 
-    return hospede.affected == 1 ? response.status(200).json(new HttpResponse<Hospede>(newHospede, 200, 'Hospede alterado com sucesso.')) : response.status(404).json(new HttpResponse<Hospede>(null, 404, 'Hospede não localizado.'))
+    if( hospede.affected == 1 ){
+        newHospede.senha = ""
+        return response.status(200).json(new HttpResponse<Hospede>(newHospede, 200, 'Hospede alterado com sucesso.'))
+
+    } 
+    else
+        response.status(404).json(new HttpResponse<Hospede>(null, 404, 'Hospede não localizado.'))
 
 };
 
