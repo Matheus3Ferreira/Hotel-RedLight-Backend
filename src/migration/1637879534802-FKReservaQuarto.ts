@@ -8,7 +8,7 @@ export class FKReservaQuarto1637879534802 implements MigrationInterface {
         await queryRunner.query(`CREATE INDEX "IDX_dccbc191a4c1d60ef7d824d278" ON "reserva_quartos_quarto" ("reservaIdReserva") `);
         await queryRunner.query(`CREATE INDEX "IDX_20643798899e74d2ae1c45b49c" ON "reserva_quartos_quarto" ("quartoNumeroQuarto") `);
         await queryRunner.query(`ALTER TABLE "reserva_quartos_quarto" ADD CONSTRAINT "FK_dccbc191a4c1d60ef7d824d278d" FOREIGN KEY ("reservaIdReserva") REFERENCES "reserva"("idReserva") ON DELETE CASCADE ON UPDATE CASCADE`);
-        await queryRunner.query(`ALTER TABLE "reserva_quartos_quarto" ADD CONSTRAINT "FK_20643798899e74d2ae1c45b49ce" FOREIGN KEY ("quartoNumeroQuarto") REFERENCES "quarto"("numeroQuarto") ON DELETE CASCADE ON UPDATE CASCADE`);
+        await queryRunner.query(`ALTER TABLE "reserva_quartos_quarto" ADD CONSTRAINT "FK_20643798899e74d2ae1c45b49ce" FOREIGN KEY ("quartoNumeroQuarto") REFERENCES "quarto"("idQuarto") ON DELETE CASCADE ON UPDATE CASCADE`);
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {

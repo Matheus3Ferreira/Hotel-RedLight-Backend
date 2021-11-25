@@ -17,7 +17,10 @@ import { Reserva } from "./Reserva";
 export class Quarto {
 
     @PrimaryGeneratedColumn()
-    numeroQuarto: number;
+    idQuarto: number;
+
+    @Column()
+    numero: number;
 
     @ManyToMany(() => Comodidade)
     @JoinTable()
@@ -31,9 +34,6 @@ export class Quarto {
 
     @Column("float", { scale: 2 })
     valorDiaria: number;
-
-    @Column()
-    imagem: string;
 
     @CreateDateColumn()
     created_at: Date;
