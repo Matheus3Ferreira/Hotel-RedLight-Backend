@@ -22,7 +22,7 @@ export const authHospede = async (request: Request, response: Response) => {
         const registry = await getRepository(Hospede).findOne({where: {email, senha}});
 
         if(!registry)
-            return response.status(404).json(new HttpResponse<Hospede>(null, 404, 'Hospede não localizado.'));
+            return response.status(404).json(new HttpResponse<Hospede>(null, 404, 'Dados incorretos.'));
             
         registry.senha = undefined;
         return response.status(200).json({data: registry, token: generateToken({id: registry.idHospede})});
@@ -42,8 +42,6 @@ export const authHospede = async (request: Request, response: Response) => {
 export const signupHospede = async (request: Request, response: Response) => {
 
     let type = request.query["tipo"];
-
-
 
     const registry = request.body;
     if (type == "hospede"){

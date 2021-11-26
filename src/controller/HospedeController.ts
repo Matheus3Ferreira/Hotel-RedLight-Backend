@@ -2,7 +2,9 @@ import { getRepository } from 'typeorm';
 import { Hospede } from '../entity/Hospede';
 import { Request, Response } from 'express';
 import { HttpResponse } from './response';
-import { hash } from 'bcrypt'
+import { hash } from 'bcrypt';
+import * as jwt from 'jsonwebtoken';
+import { secret } from '../config'
 
 export const getHospedes = async (request: Request, response: Response) => {
     const hospede = await getRepository(Hospede).find({order: {idHospede: "ASC"}});
@@ -66,3 +68,17 @@ export const deleteHospede = async (request: Request, response: Response) => {
     return hospede.affected == 1 ? response.status(204).json(new HttpResponse<Hospede>(null, 204, 'Hospede deletado com sucesso.')) : response.status(404).json(new HttpResponse<Hospede>(null, 404, 'Hospede não localizado.'))
 
 };
+
+export const getMe = async (request: Request, response: Response) => {
+        const token = request.headers.authorization.split(' ')[1];
+
+        const register = jwt.verify(token, secret);
+
+        const hospede = await getRepository(Hospede).findOne({where: {idHospede: register.id}})
+
+        hospede.senha = ""
+
+        return response.status(200).json(new HttpResponse<Hospede>(hospede, 200, 'Dados do hospede logado.'));
+
+
+}
