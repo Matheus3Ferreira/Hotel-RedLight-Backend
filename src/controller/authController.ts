@@ -25,7 +25,7 @@ export const authHospede = async (request: Request, response: Response) => {
             return response.status(404).json(new HttpResponse<Hospede>(null, 404, 'Hospede não localizado.'));
             
         registry.senha = undefined;
-        return response.status(200).json(new HttpResponse<Hospede>(registry, 200, {data: registry, token: generateToken({id: registry.idHospede})}.toString()));
+        return response.status(200).json({data: registry, token: generateToken({id: registry.idHospede})});
     } else
     if (type == 'funcionario'){
         const registry = await getRepository(Funcionario).findOne({where: {email, senha}});
@@ -34,19 +34,36 @@ export const authHospede = async (request: Request, response: Response) => {
             return response.status(404).json(new HttpResponse<Funcionario>(null, 404, 'Funcionario não localizado.'));
             
         registry.senha = undefined;
-        return response.status(200).json(new HttpResponse<Funcionario>(registry, 200, {data: registry, token: generateToken({id: registry.idFuncionario})}.toString()));
+        return response.status(200).json({data: registry, token: generateToken({id: registry.idFuncionario})})
     } else
     return response.status(400).json(new HttpResponse<Funcionario>(null, 400, 'O parâmetro passado deve ser \"hospede\" ou \"funcionario.\"'))
 };
 
 export const signupHospede = async (request: Request, response: Response) => {
 
-    const hospede = request.body;
-   
-    if (await getRepository(Hospede).findOne({ where: { email: hospede.email} })) 
-        return response.status(403).json({msg: 'Email já cadastrado'});
+    let type = request.query["tipo"];
 
-    const savedHospede = await getRepository(Hospede).save(request.body);
-    savedHospede.senha = "";
-    return response.status(201).json({data: savedHospede, token: generateToken({id: savedHospede.id})});
-};
+
+
+    const registry = request.body;
+    if (type == "hospede"){
+
+        if (await getRepository(Hospede).findOne({ where: { email: registry.email} })) 
+        return response.status(403).json(new HttpResponse<Hospede>(null, 403, 'Email já cadastrado'));
+        
+        const savedHospede = await getRepository(Hospede).save(request.body);
+        savedHospede.senha = "";
+        return response.status(201).json({data: savedHospede, token: generateToken({idHospede: savedHospede.idHospede})});
+    }
+    else
+        if (type == "funcionario"){
+            
+        if (await getRepository(Funcionario).findOne({ where: { email: registry.email} })) 
+        return response.status(403).json(new HttpResponse<Funcionario>(null, 403, 'Email já cadastrado'));
+        
+        const savedFuncionario = await getRepository(Funcionario).save(request.body);
+        savedFuncionario.senha = "";
+        return response.status(201).json({data: savedFuncionario, token: generateToken({idFuncionario: savedFuncionario.idFuncionario})});
+        } else
+            return response.status(400).json(new HttpResponse<Funcionario>(null, 403, 'O query param deve ser \"hospede\" ou \"funcionario\"'));
+    };
