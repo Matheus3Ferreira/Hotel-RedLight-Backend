@@ -29,7 +29,7 @@ export class Reserva {
 
     @ManyToMany(type => Quarto)
     @JoinTable()
-    quartos: Quarto;
+    quartos: Quarto[];
 
     @Column()
     adultos: number;

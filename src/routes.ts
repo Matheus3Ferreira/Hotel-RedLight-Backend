@@ -2,7 +2,7 @@ import { Router } from 'express'
 import { getOcupacoes, getOcupacao, saveOcupacao, updateOcupacao, deleteOcupacao } from './controller/OcupacaoController'
 import { getFuncionarios, getFuncionario, saveFuncionario, updateFuncionario, deleteFuncionario } from './controller/FuncionarioController'
 import { deleteComodidade, getComodidade, getComodidades, saveComodidade, updateComodidade } from './controller/ComodidadeController';
-import { deleteQuarto, getQuartos, getQuarto, saveQuarto, updateQuarto } from './controller/QuartoController'
+import { deleteQuarto, getQuartos, getQuarto, saveQuarto, updateQuarto, disponibility } from './controller/QuartoController'
 import { deleteHospede, getHospede, getHospedes, getMe, saveHospede, updateHospede } from './controller/HospedeController';
 import { deleteServico, getOneServico, getServicos, saveServico, updateServico } from './controller/ServicoController'
 import { deleteReserva, getReserva, getReservas, saveReserva, updateReserva } from './controller/ReservaController';
@@ -44,6 +44,7 @@ routes.get('/quarto/:id', getQuarto);
 routes.post('/quarto', saveQuarto);
 routes.put('/quarto/:id', updateQuarto);
 routes.delete('/quarto/:id', deleteQuarto);
+routes.get('/disponibilidade/quarto', disponibility)
 
 routes.get('/reserva', getReservas);
 routes.get('/reserva/:id', getReserva);
