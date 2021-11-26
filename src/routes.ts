@@ -9,15 +9,11 @@ import { checkReserva, deleteReserva, getReserva, getReservas, saveReserva, upda
 import { deleteConsumo, getConsumos, getOneConsumo, saveConsumo, updateConsumo } from './controller/ConsumoController'
 import { authHospede, signupHospede } from './controller/authController';
 import tokenValidator from './middleware/TokenValidator';
-import { teste } from './controller/teste';
 
 const routes = Router();
 
-
 routes.post('/auth/signup', signupHospede);
 routes.post('/auth', authHospede);
-
-routes.get('/teste', teste);
 
 routes.get('/hospede', getHospedes);
 routes.get('/hospede/:id', getHospede);
@@ -56,7 +52,7 @@ routes.get('/reserva/:id', getReserva);
 routes.post('/reserva', saveReserva);
 routes.put('/reserva/:id', updateReserva);
 routes.delete('/reserva/:id', deleteReserva);
-routes.patch('reserva', checkReserva);
+routes.patch('/reserva/:id', checkReserva);
 
 routes.get('/servico', getServicos);
 routes.get('/servico/:id', getOneServico);
@@ -70,7 +66,7 @@ routes.post('/consumo', saveConsumo);
 routes.put('/consumo/:id', updateConsumo);
 routes.delete('/consumo/:id', deleteConsumo);
 
-routes.use(tokenValidator)
+// routes.use(tokenValidator)
 
 routes.get('/me', getMe);
 
