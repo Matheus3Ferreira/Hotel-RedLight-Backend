@@ -36,6 +36,11 @@ export class Reserva {
     
     @Column({default: 0})
     criancas: number;
+
+    @Column({
+        default: false
+    })
+    checado: Boolean;
     
     @Column()
     checkIn: Date;

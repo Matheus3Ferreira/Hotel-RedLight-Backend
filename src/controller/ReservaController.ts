@@ -37,3 +37,18 @@ export const deleteReserva = async (request: Request, response: Response) => {
 
     return reserva.affected == 1 ? response.status(200).json(new HttpResponse<Reserva>(null, 200, 'Reserva excluida com sucesso.')) : response.status(404).json(new HttpResponse<Reserva>(null, 404, 'Reserva não localizada '))
 };
+
+export const checkReserva = async (request: Request, response: Response) => {
+    const {idReserva} = request.params;
+    const reservaChecada = await getRepository(Reserva).update(idReserva, {
+        checado: true
+    })
+
+   if (reservaChecada.affected) {
+       const reserva = await getRepository(Reserva).findOne(idReserva);
+       return response.status(200).json(new HttpResponse<Reserva>(reserva, 200, 'Reserva checada com sucesso.')); 
+   }
+   else
+       return response.status(200).json(new HttpResponse<Reserva>(null, 404, 'Reserva não localizada.')); 
+
+}   
