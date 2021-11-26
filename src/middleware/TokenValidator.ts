@@ -25,7 +25,7 @@ export default function tokenValidator(req: any, res: any, next: Function) {
         if(err) 
             return res.status(401).send(new HttpResponse(null, 401, 'Token invalid'));
 
-        req.confirmationCode = decoded.idHospede;
+        req.confirmationCode = decoded.id;
         return next();
 
     });

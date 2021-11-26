@@ -21,8 +21,9 @@ export const saveQuarto = async (request: Request, response: Response) => {
 }
 
 export const updateQuarto = async (request: Request, response: Response) => {
-    const { id } = request.params
-    const quarto = await getRepository(Quarto).update(id, request.body)
+    const { id, comodidades } = request.params
+
+    const quarto = await getRepository(Quarto).update(id, request.body);
 
     return quarto.affected == 1 ? response.status(200).json('Quarto alterado com sucesso.') : response.status(404).json('Quarto não localizado.')
 

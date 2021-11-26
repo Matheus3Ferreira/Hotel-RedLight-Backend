@@ -5,14 +5,12 @@ import { deleteComodidade, getComodidade, getComodidades, saveComodidade, update
 import { deleteQuarto, getQuartos, getQuarto, saveQuarto, updateQuarto } from './controller/QuartoController'
 import { deleteHospede, getHospede, getHospedes, getMe, saveHospede, updateHospede } from './controller/HospedeController';
 import { deleteServico, getOneServico, getServicos, saveServico, updateServico } from './controller/ServicoController'
-import { deleteReserva, getReserva, getReservas, saveReserva, testReserva, updateReserva } from './controller/ReservaController';
+import { deleteReserva, getReserva, getReservas, saveReserva, updateReserva } from './controller/ReservaController';
 import { deleteConsumo, getConsumos, getOneConsumo, saveConsumo, updateConsumo } from './controller/ConsumoController'
 import { authHospede, signupHospede } from './controller/authController';
 import tokenValidator from './middleware/TokenValidator';
 
 const routes = Router();
-
-
 
 routes.post('/auth/signup', signupHospede);
 routes.post('/auth', authHospede);
@@ -50,7 +48,6 @@ routes.delete('/quarto/:id', deleteQuarto);
 routes.get('/reserva', getReservas);
 routes.get('/reserva/:id', getReserva);
 routes.post('/reserva', saveReserva);
-routes.post('/reserva/test', testReserva);
 routes.put('/reserva/:id', updateReserva);
 routes.delete('/reserva/:id', deleteReserva);
 
