@@ -19,7 +19,7 @@ export class Hospede {
     @PrimaryGeneratedColumn()
     idHospede: number;
 
-    @OneToMany(type => Reserva, hospede => Hospede)
+    @OneToMany(type => Reserva, reserva => reserva.hospede)
     reservas: Reserva[];
 
     @Column()

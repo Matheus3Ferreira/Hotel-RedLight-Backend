@@ -70,15 +70,20 @@ export const deleteHospede = async (request: Request, response: Response) => {
 };
 
 export const getMe = async (request: Request, response: Response) => {
-        const token = request.headers.authorization.split(' ')[1];
+    const token = request.headers.authorization.split(' ')[1];
 
-        const register = jwt.verify(token, secret);
+    const register = jwt.verify(token, secret);
 
-        const hospede = await getRepository(Hospede).findOne({where: {idHospede: register.id}})
+    const hospede = await getRepository(Hospede).findOne({where: {idHospede: register.id}})
 
-        hospede.senha = ""
+    hospede.senha = ""
 
-        return response.status(200).json(new HttpResponse<Hospede>(hospede, 200, 'Dados do hospede logado.'));
+    return response.status(200).json(new HttpResponse<Hospede>(hospede, 200, 'Dados do hospede logado.'));
+}
 
+export const findReservas = async (request: Request, response: Response) => {
+    const cpf = request.query;
+    const hospede = await getRepository(Hospede).findOne(cpf, { relations: ["reservas"] });
 
+    return response.json(hospede)
 }

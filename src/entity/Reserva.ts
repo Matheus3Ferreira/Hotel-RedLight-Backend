@@ -23,7 +23,7 @@ export class Reserva {
     @Column()
     idHospede: number;
 
-    @ManyToOne(type => Hospede, reservas => Reserva, { eager: true})
+    @ManyToOne(type => Hospede, hospede => hospede.reservas, { eager: true})
     @JoinColumn({name: "idHospede"})
     hospede: Hospede;
 
@@ -41,6 +41,9 @@ export class Reserva {
         default: false
     })
     checado: Boolean;
+
+    @Column({nullable: true})
+    protocolo: string;
     
     @Column()
     checkIn: Date;

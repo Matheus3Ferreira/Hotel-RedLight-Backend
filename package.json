@@ -24,7 +24,8 @@
       "pg": "^8.4.0",
       "reflect-metadata": "^0.1.13",
       "rxjs": "^7.4.0",
-      "typeorm": "0.2.37"
+      "typeorm": "0.2.37",
+      "uniqid": "^5.4.0"
    },
    "scripts": {
       "build": "tsc -p .",

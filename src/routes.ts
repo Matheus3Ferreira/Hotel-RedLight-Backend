@@ -3,23 +3,28 @@ import { getOcupacoes, getOcupacao, saveOcupacao, updateOcupacao, deleteOcupacao
 import { getFuncionarios, getFuncionario, saveFuncionario, updateFuncionario, deleteFuncionario } from './controller/FuncionarioController'
 import { deleteComodidade, getComodidade, getComodidades, saveComodidade, updateComodidade } from './controller/ComodidadeController';
 import { deleteQuarto, getQuartos, getQuarto, saveQuarto, updateQuarto, disponibility } from './controller/QuartoController'
-import { deleteHospede, getHospede, getHospedes, getMe, saveHospede, updateHospede } from './controller/HospedeController';
+import { deleteHospede, findReservas, getHospede, getHospedes, getMe, saveHospede, updateHospede } from './controller/HospedeController';
 import { deleteServico, getOneServico, getServicos, saveServico, updateServico } from './controller/ServicoController'
 import { checkReserva, deleteReserva, getReserva, getReservas, saveReserva, updateReserva } from './controller/ReservaController';
 import { deleteConsumo, getConsumos, getOneConsumo, saveConsumo, updateConsumo } from './controller/ConsumoController'
 import { authHospede, signupHospede } from './controller/authController';
 import tokenValidator from './middleware/TokenValidator';
+import { teste } from './controller/teste';
 
 const routes = Router();
 
+
 routes.post('/auth/signup', signupHospede);
 routes.post('/auth', authHospede);
+
+routes.get('/teste', teste);
 
 routes.get('/hospede', getHospedes);
 routes.get('/hospede/:id', getHospede);
 routes.post('/hospede', saveHospede);
 routes.put('/hospede/:id', updateHospede);
 routes.delete('/hospede/:id', deleteHospede);
+routes.get('/hospedefilter/:cpf', findReservas);
 
 routes.get('/ocupacao', getOcupacoes);
 routes.get('/ocupacao/:id', getOcupacao);

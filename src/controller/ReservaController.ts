@@ -3,6 +3,7 @@ import { Reserva } from '../entity/Reserva';
 import { Request, Response } from 'express';
 import { HttpResponse } from './response';
 import { Quarto } from '../entity/Quarto';
+import uniqid from 'uniqid'
 
 export const getReservas = async (request: Request, response: Response) => {
     const reserva = await getRepository(Reserva).find({ relations: ['quartos'], order: { idReserva: "DESC" } });
@@ -28,7 +29,6 @@ export const updateReserva = async (request: Request, response: Response) => {
     const reserva = await getRepository(Reserva).update(id, request.body)
 
     return reserva.affected == 1 ? response.status(200).json(new HttpResponse<Reserva>(null, 200, 'Reserva alterada com sucesso.')) : response.status(404).json(new HttpResponse<Reserva>(null, 404, 'Reserva não localizada '))
-
 };
 
 export const deleteReserva = async (request: Request, response: Response) => {
@@ -41,7 +41,8 @@ export const deleteReserva = async (request: Request, response: Response) => {
 export const checkReserva = async (request: Request, response: Response) => {
     const {idReserva} = request.params;
     const reservaChecada = await getRepository(Reserva).update(idReserva, {
-        checado: true
+        checado: true,
+        protocolo: uniqid()
     })
 
    if (reservaChecada.affected) {
