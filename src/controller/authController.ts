@@ -10,13 +10,12 @@ const generateToken = (params = {}) => jwt.sign(params, secret, {expiresIn: 9864
 
 export const authHospede = async (request: Request, response: Response) => {
 
-    let type = request.query["type"];
+    let type = request.query["tipo"];
 
     const { email, senha } = request.body;
     
     if(!email) return;
     if(!senha) return;
-
 
     if (type == 'hospede'){
 
@@ -41,8 +40,6 @@ export const authHospede = async (request: Request, response: Response) => {
 };
 
 export const signupHospede = async (request: Request, response: Response) => {
-    
-
 
     const hospede = request.body;
    
@@ -50,6 +47,6 @@ export const signupHospede = async (request: Request, response: Response) => {
         return response.status(403).json({msg: 'Email já cadastrado'});
 
     const savedHospede = await getRepository(Hospede).save(request.body);
-    savedHospede.senha = undefined;
+    savedHospede.senha = "";
     return response.status(201).json({data: savedHospede, token: generateToken({id: savedHospede.id})});
 };
