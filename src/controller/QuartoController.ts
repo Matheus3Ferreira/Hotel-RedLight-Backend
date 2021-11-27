@@ -58,7 +58,7 @@ export const disponibility = async (request: Request, response: Response) => {
         })
     })
 
-    const quartos = await getRepository(Quarto).find()
+    const quartos = await getRepository(Quarto).find({relations: ['comodidades']});
 
     const filteredQuartos = quartos.filter(quarto => 
         !quartosId.includes(quarto.idQuarto)
