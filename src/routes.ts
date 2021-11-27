@@ -45,7 +45,7 @@ routes.get('/quarto/:id', getQuarto);
 routes.post('/quarto', saveQuarto);
 routes.put('/quarto/:id', updateQuarto);
 routes.delete('/quarto/:id', deleteQuarto);
-routes.get('/disponibilidade/quarto', disponibility)
+routes.post('/disponibilidade/quarto', disponibility)
 
 routes.get('/reserva', getReservas);
 routes.get('/reserva/:id', getReserva);

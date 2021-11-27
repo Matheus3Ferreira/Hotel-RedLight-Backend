@@ -41,7 +41,6 @@ export const deleteReserva = async (request: Request, response: Response) => {
 export const checkReserva = async (request: Request, response: Response) => {
     const {idReserva} = request.params;
 
-
     const reservaChecada = await getRepository(Reserva).update(idReserva, {
         checado: true,
         protocolo: uniqid()
