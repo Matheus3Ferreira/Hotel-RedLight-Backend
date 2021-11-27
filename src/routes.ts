@@ -52,7 +52,7 @@ routes.get('/reserva/:id', getReserva);
 routes.post('/reserva', saveReserva);
 routes.put('/reserva/:id', updateReserva);
 routes.delete('/reserva/:id', deleteReserva);
-routes.patch('/reserva/:id', checkReserva);
+routes.post('/checkReserva/:id', checkReserva);
 
 routes.get('/servico', getServicos);
 routes.get('/servico/:id', getOneServico);
@@ -66,7 +66,7 @@ routes.post('/consumo', saveConsumo);
 routes.put('/consumo/:id', updateConsumo);
 routes.delete('/consumo/:id', deleteConsumo);
 
-// routes.use(tokenValidator)
+routes.use(tokenValidator)
 
 routes.get('/me', getMe);
 
