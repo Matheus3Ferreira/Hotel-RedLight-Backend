@@ -1,1 +1,1 @@
-export const secret = "pr1m45s4od1m415";
+export const secret = process.env.SECRET;
